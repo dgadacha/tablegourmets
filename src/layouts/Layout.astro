@@ -1,0 +1,124 @@
+---
+import '../styles/global.css';
+
+const {
+  title = 'La Table des Gourmets — Restaurant gastronomique à Nouméa',
+  description = 'La Table des Gourmets, n°1 des restaurants de Nouméa sur TripAdvisor. Cuisine française et spécialités alsaciennes depuis 2009. Réservations au +687 24 95 25.',
+} = Astro.props;
+
+const ogImage = new URL(
+  '/images/jambonneau-braise-a-la.jpg',
+  Astro.site
+).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  name: 'La Table des Gourmets',
+  image: ogImage,
+  description,
+  servesCuisine: ['Française', 'Brasserie', 'Alsacienne'],
+  priceRange: '€€-€€€',
+  telephone: '+687 24 95 25',
+  email: 'direction@latabledesgourmets.com',
+  url: 'https://latabledesgourmets.com',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '91 rue Maurice Herzog',
+    addressLocality: 'Nouméa',
+    postalCode: '98800',
+    addressCountry: 'NC',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: -22.265, longitude: 166.457 },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '11:00',
+      closes: '13:30',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '19:00',
+      closes: '21:30',
+    },
+  ],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.6',
+    reviewCount: '570',
+  },
+  acceptsReservations: 'True',
+};
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href="https://latabledesgourmets.com" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="restaurant" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Polices -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(jsonLd)}
+    />
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      // Nav : fond opaque au scroll
+      const nav = document.getElementById('nav');
+      const onScroll = () =>
+        nav?.classList.toggle('scrolled', window.scrollY > 40);
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // Menu mobile
+      const toggle = document.getElementById('navToggle');
+      const links = document.getElementById('navLinks');
+      toggle?.addEventListener('click', () => {
+        const open = links?.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(!!open));
+      });
+      links?.querySelectorAll('a').forEach((a) =>
+        a.addEventListener('click', () => links.classList.remove('open'))
+      );
+
+      // Apparition au scroll
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add('in');
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

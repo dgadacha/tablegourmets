@@ -1,0 +1,180 @@
+:root {
+  /* Charte alignée sur le logo : brun chocolat + rouge (téléphone/vichy) sur crème */
+  --ink: #2f2117; /* brun espresso — texte & sections sombres */
+  --ink-soft: #5c4636;
+  --cream: #f7f0e3;
+  --cream-deep: #efe3d0;
+  --paper: #fffdf8;
+  --brown: #5e3a22; /* brun du logo — remplissages identitaires */
+  --wine: #c0392b; /* ROUGE de marque — accent / action */
+  --wine-deep: #9e2b20;
+  --gold: #b07c47; /* caramel / tan — accent doux */
+  --gold-soft: #dcb888;
+  --muted: #8a7560;
+  --line: #e7dbc6;
+  --shadow: 0 24px 60px -28px rgba(47, 33, 23, 0.45);
+  --shadow-sm: 0 10px 30px -16px rgba(47, 33, 23, 0.3);
+  --maxw: 1180px;
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.01em;
+}
+
+section {
+  scroll-margin-top: 76px;
+}
+
+/* ---------- utilitaires ---------- */
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 48px);
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--wine);
+}
+
+.section-pad {
+  padding-block: clamp(64px, 9vw, 120px);
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: clamp(36px, 5vw, 60px);
+}
+
+.section-head h2 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  margin-top: 0.5rem;
+}
+
+.section-head em {
+  font-style: italic;
+  color: var(--wine);
+}
+
+/* Liseré vichy rouge — clin d'œil à la nappe du logo */
+.gingham-band {
+  height: 18px;
+  background-color: #fff;
+  background-image: repeating-linear-gradient(
+      90deg,
+      rgba(192, 57, 43, 0.5) 0 9px,
+      transparent 9px 18px
+    ),
+    repeating-linear-gradient(0deg, rgba(192, 57, 43, 0.5) 0 9px, transparent 9px 18px);
+  border-block: 1px solid rgba(192, 57, 43, 0.22);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  padding: 0.85rem 1.65rem;
+  border-radius: 999px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
+    color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--wine);
+  color: #fff;
+  box-shadow: var(--shadow-sm);
+}
+.btn-primary:hover {
+  background: var(--wine-deep);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.btn-ghost:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.btn-light {
+  border-color: rgba(255, 255, 255, 0.7);
+  color: #fff;
+}
+.btn-light:hover {
+  background: #fff;
+  color: var(--ink);
+}
+
+/* ---------- animation reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

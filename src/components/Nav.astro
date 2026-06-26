@@ -1,0 +1,177 @@
+---
+const links = [
+  { href: '#maison', label: 'La Maison' },
+  { href: '#carte', label: 'La Carte' },
+  { href: '#avis', label: 'Avis' },
+  { href: '#infos', label: 'Infos' },
+];
+---
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="brand" aria-label="La Table des Gourmets — accueil">
+      <img
+        class="brand-logo"
+        src="/images/logo.png"
+        alt="La Table des Gourmets"
+      />
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Navigation principale">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+      <a href="tel:+687249525" class="btn btn-primary nav-cta">Réserver</a>
+    </nav>
+
+    <button
+      class="nav-toggle"
+      id="navToggle"
+      aria-label="Ouvrir le menu"
+      aria-expanded="false"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+    padding-block: 0.9rem;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+  }
+  .brand-logo {
+    height: 44px;
+    width: auto;
+    display: block;
+    background: var(--paper);
+    padding: 7px 14px;
+    border-radius: 12px;
+    box-shadow: 0 8px 22px -10px rgba(47, 33, 23, 0.5);
+    transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease,
+      height 0.3s ease;
+  }
+  /* Une fois scrollé, la nav est crème : le logo peut s'y poser sans badge */
+  .nav.scrolled .brand-logo {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    height: 40px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .nav-links > a:not(.nav-cta) {
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+  .nav-links > a:not(.nav-cta)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: var(--wine);
+    transition: width 0.25s ease;
+  }
+  .nav-links > a:not(.nav-cta):hover::after {
+    width: 100%;
+  }
+
+  .nav.scrolled {
+    background: rgba(247, 240, 227, 0.92);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-sm);
+    padding-block: 0.55rem;
+  }
+  .nav.scrolled .nav-links > a:not(.nav-cta) {
+    color: var(--ink);
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .nav-toggle span {
+    width: 26px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: background 0.3s ease;
+  }
+  .nav.scrolled .nav-toggle span {
+    background: var(--ink);
+  }
+
+  @media (max-width: 860px) {
+    .nav-toggle {
+      display: flex;
+    }
+    .nav-links {
+      position: absolute;
+      top: 100%;
+      right: clamp(20px, 5vw, 48px);
+      left: clamp(20px, 5vw, 48px);
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.25rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 0.8rem;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(-12px);
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .nav-links.open {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+    .nav-links > a:not(.nav-cta),
+    .nav.scrolled .nav-links > a:not(.nav-cta) {
+      color: var(--ink);
+      padding: 0.7rem 0.8rem;
+      border-radius: 10px;
+    }
+    .nav-links > a:not(.nav-cta)::after {
+      display: none;
+    }
+    .nav-links > a:not(.nav-cta):hover {
+      background: var(--cream);
+    }
+    .nav-cta {
+      margin-top: 0.4rem;
+      justify-content: center;
+    }
+  }
+</style>

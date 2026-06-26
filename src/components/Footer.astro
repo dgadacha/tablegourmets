@@ -1,0 +1,120 @@
+---
+const year = 2026;
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img
+        class="footer-logo"
+        src="/images/logo.png"
+        alt="La Table des Gourmets"
+      />
+      <p>Cuisine française à Nouméa, depuis 2009.</p>
+    </div>
+
+    <div class="footer-cols">
+      <div>
+        <h4>Le restaurant</h4>
+        <p>91 rue Maurice Herzog</p>
+        <p>98800 Nouméa</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href="tel:+687249525">+687 24 95 25</a></p>
+        <p><a href="mailto:direction@latabledesgourmets.com">Nous écrire</a></p>
+      </div>
+      <div>
+        <h4>Suivez-nous</h4>
+        <p>
+          <a
+            href="https://www.facebook.com/tablegourmets/"
+            target="_blank"
+            rel="noopener">Facebook</a
+          >
+        </p>
+        <p>
+          <a
+            href="https://www.instagram.com/tabledesgourmets/"
+            target="_blank"
+            rel="noopener">Instagram</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>© {year} La Table des Gourmets — Tous droits réservés.</span>
+    <span class="demo">Site de démonstration</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: #18120e;
+    color: rgba(247, 240, 227, 0.8);
+    padding-top: clamp(48px, 7vw, 80px);
+  }
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    padding-bottom: 40px;
+  }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+    max-width: 320px;
+  }
+  .footer-logo {
+    height: 64px;
+    width: auto;
+    background: var(--paper);
+    padding: 12px 18px;
+    border-radius: 14px;
+  }
+  .footer-brand p {
+    font-size: 0.9rem;
+    color: rgba(247, 240, 227, 0.6);
+  }
+
+  .footer-cols {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(28px, 5vw, 64px);
+  }
+  .footer-cols h4 {
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+    margin-bottom: 0.7rem;
+  }
+  .footer-cols p {
+    font-size: 0.92rem;
+    margin-bottom: 0.3rem;
+  }
+  .footer-cols a:hover {
+    color: #fff;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 22px 0;
+    margin-top: 8px;
+    border-top: 1px solid rgba(247, 240, 227, 0.12);
+    font-size: 0.82rem;
+    color: rgba(247, 240, 227, 0.5);
+  }
+  .demo {
+    color: rgba(247, 240, 227, 0.35);
+  }
+</style>

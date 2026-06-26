@@ -1,0 +1,150 @@
+---
+const tripAdvisorUrl =
+  'https://www.tripadvisor.fr/Restaurant_Review-g294130-d1510079-Reviews-La_Table_des_Gourmets-Noumea_Grand_Terre.html';
+
+const reviews = [
+  {
+    quote: 'Une vraie pépite ! Ici, on ne mange pas, on voyage.',
+    author: 'Avis TripAdvisor',
+  },
+  {
+    quote:
+      "Le patron est un professionnel : pas une assiette ne sort de sa cuisine sans supervision.",
+    author: 'Avis TripAdvisor',
+  },
+  {
+    quote:
+      'Des plats savoureux, bien présentés, réalisés avec des produits de qualité.',
+    author: 'Avis TripAdvisor',
+  },
+];
+---
+
+<section class="avis section-pad" id="avis">
+  <div class="container">
+    <div class="avis-head reveal">
+      <p class="eyebrow">La parole aux gourmets</p>
+      <h2>Élu <em>n°1</em> des tables de Nouméa</h2>
+      <a
+        href={tripAdvisorUrl}
+        target="_blank"
+        rel="noopener"
+        class="ta-badge"
+      >
+        <span class="ta-rank">N°1<small>/217</small></span>
+        <span class="ta-meta">
+          <span class="stars">★★★★★</span>
+          <span>4,6/5 · 570 avis sur TripAdvisor</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="quotes">
+      {
+        reviews.map((r) => (
+          <figure class="quote reveal">
+            <span class="stars">★★★★★</span>
+            <blockquote>“{r.quote}”</blockquote>
+            <figcaption>{r.author}</figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .avis {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .avis-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto clamp(40px, 5vw, 60px);
+  }
+  .avis-head .eyebrow {
+    color: var(--gold-soft);
+  }
+  .avis-head h2 {
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    margin: 0.6rem 0 1.8rem;
+  }
+  .avis-head em {
+    font-style: italic;
+    color: var(--gold-soft);
+  }
+
+  .ta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 1.4rem 0.85rem 1rem;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .ta-badge:hover {
+    border-color: var(--gold-soft);
+    transform: translateY(-2px);
+  }
+  .ta-rank {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--gold-soft);
+  }
+  .ta-rank small {
+    font-size: 1rem;
+    opacity: 0.7;
+  }
+  .ta-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .stars {
+    color: var(--gold-soft);
+    letter-spacing: 0.12em;
+  }
+
+  .quotes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(16px, 2.4vw, 26px);
+  }
+  .quote {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 1.9rem;
+  }
+  .quote .stars {
+    font-size: 0.95rem;
+  }
+  .quote blockquote {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    line-height: 1.35;
+    margin: 0.9rem 0 1.1rem;
+    color: #fff;
+  }
+  .quote figcaption {
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  @media (max-width: 820px) {
+    .quotes {
+      grid-template-columns: 1fr;
+      max-width: 520px;
+      margin-inline: auto;
+    }
+  }
+</style>
