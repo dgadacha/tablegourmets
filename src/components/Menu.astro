@@ -1,57 +1,42 @@
 ---
-// Plats photographiés au restaurant (vraies photos fournies). Intitulés et
-// descriptions à faire valider par le restaurant.
+// Plats photographiés au restaurant (vraies photos). Intitulés à faire valider.
 const dishes = [
   {
-    cat: 'Entrée',
     name: 'Foie gras de canard',
     desc: "L'entrée gastronomique de la maison.",
     img: 'foie-gras-de-canard.jpg',
   },
   {
-    cat: 'Entrée',
     name: 'Foie de canard poêlé',
     desc: 'Saisi minute, fondant.',
     img: 'foie-de-canard-poele.jpg',
   },
   {
-    cat: 'Entrée',
     name: 'Chèvre chaud & jambon cru',
     desc: 'Croûtons de chèvre, jambon cru et salade.',
     img: 'croutons-de-chevre-au.jpg',
   },
   {
-    cat: 'Signature',
-    name: 'Jambonneau braisé à la bière',
-    desc: 'Longuement braisé, lentilles & pommes de terre rôties.',
-    img: 'jambonneau-braise-a-la.jpg',
-  },
-  {
-    cat: 'Plat',
     name: 'Entrecôte grillée',
     desc: 'Grillée, pommes de terre & garniture.',
     img: 'entrecote-grillee-pommes.jpg',
   },
   {
-    cat: 'Plat',
     name: 'Sole meunière',
     desc: 'Au beurre, légumes de saison.',
     img: 'sole-meuniere-legumes.jpg',
   },
   {
-    cat: 'Plat',
     name: 'Moules gratinées au beurre',
     desc: 'Beurre persillé, gratinées au four.',
     img: 'moules-gratinees-au-beurre.jpg',
   },
   {
-    cat: 'Plat',
     name: 'Confit de canard',
     desc: 'Cuisse confite & gratin maison.',
     img: 'confit-de-canard-gratin.jpg',
   },
   {
-    cat: 'Dessert',
     name: 'Moelleux au chocolat',
     desc: 'Cœur coulant, le dessert signature.',
     img: 'moelleux-au-chocolat.jpg',
@@ -61,9 +46,9 @@ const dishes = [
 
 <section class="carte section-pad" id="carte">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="section-head center reveal">
       <p class="eyebrow">La Carte</p>
-      <h2>Quelques <em>signatures</em></h2>
+      <h2>Nos plats <em>signatures</em></h2>
       <p class="lead">
         Cuisine française aux accents alsaciens et saveurs du Pacifique,
         renouvelée au fil des saisons. La carte du jour est toujours à
@@ -71,13 +56,31 @@ const dishes = [
       </p>
     </div>
 
+    <article class="dish-feature reveal">
+      <div class="feat-photo">
+        <img
+          src="/images/jambonneau-braise-a-la.jpg"
+          alt="Jambonneau braisé à la bière"
+          loading="lazy"
+        />
+      </div>
+      <div class="feat-body">
+        <span class="feat-label">Le plat signature</span>
+        <h3>Jambonneau braisé à la bière</h3>
+        <p>
+          Un jarret de porc longuement braisé à la bière, fondant à cœur, servi
+          avec lentilles et pommes de terre rôties.
+        </p>
+        <p class="feat-note">Servi du mardi au samedi, midi et soir.</p>
+      </div>
+    </article>
+
     <div class="dishes">
       {
-        dishes.map((d) => (
-          <article class="dish reveal">
+        dishes.map((d, i) => (
+          <article class="dish reveal" style={`--d:${(i % 3) * 80}ms`}>
             <div class="dish-photo">
               <img src={`/images/${d.img}`} alt={d.name} loading="lazy" />
-              <span class="dish-cat">{d.cat}</span>
             </div>
             <div class="dish-body">
               <h3>{d.name}</h3>
@@ -89,9 +92,9 @@ const dishes = [
     </div>
 
     <div class="carte-cta reveal">
-      <p>Envie de découvrir la suggestion du jour&nbsp;?</p>
+      <p>Suggestions du jour toujours à l'ardoise.</p>
       <div class="carte-actions">
-        <a href="tel:+687249525" class="btn btn-primary">Réserver une table</a>
+        <a href="#infos" class="btn btn-primary btn-lg">Infos & contact</a>
         <a
           href="https://www.instagram.com/tabledesgourmets/"
           target="_blank"
@@ -105,32 +108,91 @@ const dishes = [
 
 <style>
   .carte {
-    background: var(--cream-deep);
-  }
-  .lead {
-    color: var(--ink-soft);
-    font-size: 1.05rem;
-    margin-top: 0.8rem;
+    background: var(--cream);
   }
 
+  /* Plat signature — grande carte asymétrique */
+  .dish-feature {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    margin-bottom: clamp(20px, 3vw, 34px);
+  }
+  .feat-photo {
+    position: relative;
+    min-height: 320px;
+    overflow: hidden;
+  }
+  .feat-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .dish-feature:hover .feat-photo img {
+    transform: scale(1.04);
+  }
+  .feat-body {
+    padding: clamp(1.8rem, 4vw, 3.2rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .feat-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.9rem;
+  }
+  .feat-label::before {
+    content: '';
+    width: 26px;
+    height: 2px;
+    background: var(--gold);
+  }
+  .feat-body h3 {
+    font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+    margin-bottom: 0.8rem;
+  }
+  .feat-body p {
+    color: var(--ink-soft);
+    font-size: 1.06rem;
+  }
+  .feat-note {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+
+  /* Grille des autres plats */
   .dishes {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: clamp(18px, 2.4vw, 28px);
+    gap: clamp(18px, 2.4vw, 30px);
   }
   .dish {
     background: var(--paper);
     border: 1px solid var(--line);
-    border-radius: 18px;
+    border-radius: 20px;
     overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .dish:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card);
   }
   .dish-photo {
-    position: relative;
     aspect-ratio: 4 / 3;
     overflow: hidden;
   }
@@ -138,26 +200,13 @@ const dishes = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.55s ease;
   }
   .dish:hover .dish-photo img {
-    transform: scale(1.06);
-  }
-  .dish-cat {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    font-size: 0.66rem;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #fff;
-    background: rgba(192, 57, 43, 0.92);
-    padding: 0.32rem 0.7rem;
-    border-radius: 999px;
+    transform: scale(1.05);
   }
   .dish-body {
-    padding: 1.3rem 1.4rem 1.5rem;
+    padding: 1.3rem 1.4rem 1.6rem;
   }
   .dish-body h3 {
     font-size: 1.45rem;
@@ -165,7 +214,7 @@ const dishes = [
   }
   .dish-body p {
     color: var(--muted);
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   .carte-cta {
@@ -173,12 +222,12 @@ const dishes = [
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    margin-top: clamp(36px, 5vw, 56px);
+    margin-top: clamp(40px, 5vw, 60px);
     text-align: center;
   }
   .carte-cta p {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     color: var(--ink);
   }
   .carte-actions {
@@ -188,6 +237,14 @@ const dishes = [
     justify-content: center;
   }
 
+  @media (max-width: 760px) {
+    .dish-feature {
+      grid-template-columns: 1fr;
+    }
+    .feat-photo {
+      min-height: 240px;
+    }
+  }
   @media (max-width: 820px) {
     .dishes {
       grid-template-columns: repeat(2, 1fr);

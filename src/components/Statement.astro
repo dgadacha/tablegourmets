@@ -1,0 +1,59 @@
+---
+// Bande photo plein écran — rupture de rythme volontaire.
+const img = 'foie-gras-de-canard.jpg';
+---
+
+<section class="statement">
+  <div
+    class="st-bg"
+    style={`background-image:url('/images/${img}')`}
+    aria-hidden="true"
+  >
+  </div>
+  <div class="st-overlay" aria-hidden="true"></div>
+  <p class="st-text reveal">
+    Une cuisine française généreuse,<br />au cœur de Nouméa.
+  </p>
+</section>
+
+<style>
+  .statement {
+    position: relative;
+    min-height: clamp(320px, 46vh, 520px);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  .st-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.02);
+  }
+  .st-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      rgba(20, 15, 12, 0.58),
+      rgba(20, 15, 12, 0.66)
+    );
+  }
+  .st-text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.9rem, 4.5vw, 3.3rem);
+    line-height: 1.2;
+    color: #fff;
+    padding-inline: 1.5rem;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+  }
+  @media (min-width: 900px) {
+    .st-bg {
+      background-attachment: fixed;
+    }
+  }
+</style>

@@ -1,19 +1,20 @@
 :root {
-  /* Charte alignée sur le logo : brun chocolat + rouge (téléphone/vichy) sur crème */
-  --ink: #2f2117; /* brun espresso — texte & sections sombres */
-  --ink-soft: #5c4636;
-  --cream: #f7f0e3;
-  --cream-deep: #efe3d0;
-  --paper: #fffdf8;
-  --brown: #5e3a22; /* brun du logo — remplissages identitaires */
-  --wine: #c0392b; /* ROUGE de marque — accent / action */
-  --wine-deep: #9e2b20;
-  --gold: #b07c47; /* caramel / tan — accent doux */
-  --gold-soft: #dcb888;
-  --muted: #8a7560;
-  --line: #e7dbc6;
-  --shadow: 0 24px 60px -28px rgba(47, 33, 23, 0.45);
-  --shadow-sm: 0 10px 30px -16px rgba(47, 33, 23, 0.3);
+  /* Palette élégante — crème / encre / rouge / or (accent) */
+  --cream: #f8f5ef;
+  --cream-deep: #efe9dd;
+  --paper: #fdfbf7;
+  --ink: #2b241f;
+  --ink-soft: #5a5048;
+  --muted: #8c8175;
+  --wine: #b64632; /* rouge — couleur d'action (CTA) */
+  --wine-deep: #983627;
+  --gold: #c8a96a; /* or — accent uniquement */
+  --gold-soft: #ddc596;
+  --brown: #5e3a22; /* brun logo — remplissages identitaires */
+  --line: #e7ded3;
+  --shadow: 0 30px 70px -34px rgba(43, 36, 31, 0.4);
+  --shadow-sm: 0 12px 30px -16px rgba(43, 36, 31, 0.18);
+  --shadow-card: 0 16px 44px -22px rgba(43, 36, 31, 0.26);
   --maxw: 1180px;
   --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -45,7 +46,6 @@ img {
   display: block;
   max-width: 100%;
 }
-
 a {
   color: inherit;
   text-decoration: none;
@@ -73,11 +73,24 @@ section {
 }
 
 .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--wine);
+}
+.eyebrow::before {
+  content: "";
+  width: 26px;
+  height: 1.5px;
+  background: var(--gold);
+}
+/* Variante sans filet — pour alterner les styles de séparateurs */
+.eyebrow.bare::before {
+  display: none;
 }
 
 .section-pad {
@@ -85,42 +98,47 @@ section {
 }
 
 .section-head {
-  max-width: 640px;
+  max-width: 660px;
   margin-bottom: clamp(36px, 5vw, 60px);
 }
-
-.section-head h2 {
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  margin-top: 0.5rem;
+.section-head.center {
+  margin-inline: auto;
+  text-align: center;
 }
-
+.section-head.center .eyebrow {
+  justify-content: center;
+}
+.section-head h2 {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  margin-top: 0.7rem;
+}
 .section-head em {
   font-style: italic;
   color: var(--wine);
 }
-
-/* Liseré vichy rouge — clin d'œil à la nappe du logo */
-.gingham-band {
-  height: 18px;
-  background-color: #fff;
-  background-image: repeating-linear-gradient(
-      90deg,
-      rgba(192, 57, 43, 0.5) 0 9px,
-      transparent 9px 18px
-    ),
-    repeating-linear-gradient(0deg, rgba(192, 57, 43, 0.5) 0 9px, transparent 9px 18px);
-  border-block: 1px solid rgba(192, 57, 43, 0.22);
+.section-head .lead {
+  margin-top: 0.9rem;
+  color: var(--ink-soft);
+  font-size: 1.06rem;
 }
 
+.stars {
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  font-size: 0.95rem;
+}
+
+/* ---------- boutons ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  justify-content: center;
+  gap: 0.6rem;
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 0.92rem;
-  letter-spacing: 0.02em;
-  padding: 0.85rem 1.65rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  padding: 0.9rem 1.7rem;
   border-radius: 999px;
   border: 1.5px solid transparent;
   cursor: pointer;
@@ -128,17 +146,24 @@ section {
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
     color 0.2s ease, border-color 0.2s ease;
 }
-
+.btn svg {
+  width: 1.15em;
+  height: 1.15em;
+}
+.btn-lg {
+  padding: 1.1rem 2.2rem;
+  font-size: 1.05rem;
+}
 .btn-primary {
   background: var(--wine);
   color: #fff;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 14px 30px -12px rgba(182, 70, 50, 0.55);
 }
 .btn-primary:hover {
   background: var(--wine-deep);
   transform: translateY(-2px);
+  box-shadow: 0 18px 36px -12px rgba(182, 70, 50, 0.6);
 }
-
 .btn-ghost {
   border-color: var(--ink);
   color: var(--ink);
@@ -146,22 +171,29 @@ section {
 .btn-ghost:hover {
   background: var(--ink);
   color: var(--cream);
+  transform: translateY(-2px);
 }
-
 .btn-light {
-  border-color: rgba(255, 255, 255, 0.7);
+  border-color: rgba(255, 255, 255, 0.75);
   color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(4px);
 }
 .btn-light:hover {
   background: #fff;
   color: var(--ink);
+  transform: translateY(-2px);
 }
 
-/* ---------- animation reveal ---------- */
+/* ---------- animations ---------- */
 .reveal {
   opacity: 0;
   transform: translateY(26px);
   transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--d, 0ms);
+}
+.reveal.scale {
+  transform: translateY(26px) scale(0.97);
 }
 .reveal.in {
   opacity: 1;
@@ -176,5 +208,12 @@ section {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+
+/* place pour la barre fixe mobile */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 68px;
   }
 }

@@ -1,0 +1,64 @@
+---
+const dirUrl =
+  'https://www.google.com/maps/dir/?api=1&destination=91+Rue+Maurice+Herzog+Noum%C3%A9a';
+---
+
+<nav class="mobilebar" aria-label="Accès rapide">
+  <a href="#carte" class="mb-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      ><path d="M3 2v7c0 1.1.9 2 2 2a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"
+      ></path><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg
+    >
+    La carte
+  </a>
+  <a href="#infos" class="mb-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      ><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path
+        d="M12 8h.01"></path></svg
+    >
+    Infos
+  </a>
+  <a href={dirUrl} target="_blank" rel="noopener" class="mb-item">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+      ><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle
+        cx="12"
+        cy="10"
+        r="3"></circle></svg
+    >
+    Itinéraire
+  </a>
+</nav>
+
+<style>
+  .mobilebar {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .mobilebar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 60;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
+      background: rgba(253, 251, 247, 0.96);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid var(--line);
+      box-shadow: 0 -10px 28px -18px rgba(43, 36, 31, 0.5);
+    }
+    .mb-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--ink);
+      padding: 0.45rem;
+      border-radius: 12px;
+    }
+  }
+</style>

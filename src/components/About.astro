@@ -1,51 +1,56 @@
 ---
 const stats = [
-  { value: 'N°1', label: 'sur 217 tables à Nouméa' },
-  { value: '4,6/5', label: '570 avis clients' },
-  { value: '2009', label: "année d'ouverture" },
+  { value: '2009', label: 'Ouvert depuis' },
+  { value: 'N°1', label: 'à Nouméa' },
+  { value: '4,6/5', label: 'note moyenne' },
+  { value: '570', label: 'avis clients' },
 ];
 ---
 
 <section class="maison section-pad" id="maison">
-  <div class="container maison-grid">
-    <div class="maison-media reveal">
-      <img
-        src="/images/la-table-des-gourmets.jpg"
-        alt="Enseigne du restaurant La Table des Gourmets — ouvert du mardi au samedi"
-        loading="lazy"
-      />
-      <div class="maison-tag">
-        <span>Depuis</span>
-        <strong>2009</strong>
+  <div class="container">
+    <div class="maison-grid">
+      <div class="maison-media reveal">
+        <div class="brand-plate">
+          <img
+            src="/images/logo.png"
+            alt="Logo La Table des Gourmets"
+            loading="lazy"
+          />
+        </div>
+        <div class="maison-tag">
+          <span>Depuis</span>
+          <strong>2009</strong>
+        </div>
+      </div>
+
+      <div class="maison-text reveal">
+        <p class="eyebrow">Notre histoire</p>
+        <h2>Une cuisine française <em>habitée</em>.</h2>
+        <p>
+          Depuis 2009, La Table des Gourmets célèbre la cuisine française au fil
+          des saisons. Aux fourneaux, un chef d'origine alsacienne compose une
+          carte renouvelée régulièrement, entre grands classiques et
+          spécialités de sa région.
+        </p>
+        <p>
+          Ici, pas une assiette ne quitte la cuisine sans l'œil du chef — une
+          exigence qui vaut à la maison la <strong
+            >première place des tables de Nouméa</strong
+          >.
+        </p>
       </div>
     </div>
 
-    <div class="maison-text reveal">
-      <p class="eyebrow">La Maison</p>
-      <h2>Une cuisine française <em>habitée</em>.</h2>
-      <p>
-        Depuis 2009, La Table des Gourmets célèbre la cuisine française au fil
-        des saisons. Aux fourneaux, un chef d'origine alsacienne compose une
-        carte renouvelée régulièrement, entre grands classiques et spécialités
-        de sa région.
-      </p>
-      <p>
-        Ici, pas une assiette ne quitte la cuisine sans l'œil du chef — une
-        exigence qui vaut à la maison la <strong
-          >première place des tables de Nouméa</strong
-        >.
-      </p>
-
-      <div class="stats">
-        {
-          stats.map((s) => (
-            <div class="stat">
-              <strong>{s.value}</strong>
-              <span>{s.label}</span>
-            </div>
-          ))
-        }
-      </div>
+    <div class="stats reveal">
+      {
+        stats.map((s) => (
+          <div class="stat">
+            <strong>{s.value}</strong>
+            <span>{s.label}</span>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -61,12 +66,20 @@ const stats = [
   .maison-media {
     position: relative;
   }
-  .maison-media img {
-    width: 100%;
+  .brand-plate {
+    display: grid;
+    place-items: center;
     aspect-ratio: 4 / 3;
-    object-fit: cover;
+    padding: clamp(2rem, 5vw, 3.5rem);
+    background: var(--paper);
+    border: 1px solid var(--line);
     border-radius: 20px;
     box-shadow: var(--shadow);
+  }
+  .brand-plate img {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
   }
   .maison-tag {
     position: absolute;
@@ -111,23 +124,35 @@ const stats = [
     font-weight: 600;
   }
 
+  /* Bande de chiffres — éditoriale, sans boîtes, séparateurs verticaux */
   .stats {
     display: flex;
     flex-wrap: wrap;
-    gap: clamp(20px, 4vw, 48px);
-    margin-top: 2rem;
-    padding-top: 2rem;
+    justify-content: center;
+    margin-top: clamp(48px, 6vw, 84px);
     border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stat {
+    flex: 1 1 170px;
+    text-align: center;
+    padding: clamp(22px, 3vw, 36px) 1rem;
+    border-left: 1px solid var(--line);
+  }
+  .stat:first-child {
+    border-left: 0;
   }
   .stat strong {
     display: block;
     font-family: var(--font-serif);
-    font-size: 2.3rem;
+    font-size: clamp(2.2rem, 4.5vw, 3rem);
     line-height: 1;
     color: var(--wine);
   }
   .stat span {
-    font-size: 0.88rem;
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
     color: var(--muted);
   }
 
@@ -140,6 +165,14 @@ const stats = [
     }
     .maison-tag {
       right: 16px;
+    }
+  }
+  @media (max-width: 600px) {
+    .stat {
+      flex-basis: 50%;
+    }
+    .stat:nth-child(3) {
+      border-left: 0;
     }
   }
 </style>

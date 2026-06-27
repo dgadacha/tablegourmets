@@ -2,50 +2,64 @@
 const tripAdvisorUrl =
   'https://www.tripadvisor.fr/Restaurant_Review-g294130-d1510079-Reviews-La_Table_des_Gourmets-Noumea_Grand_Terre.html';
 
+// Avis réels relevés sur TripAdvisor (tous 5/5).
 const reviews = [
   {
-    quote: 'Une vraie pépite ! Ici, on ne mange pas, on voyage.',
-    author: 'Avis TripAdvisor',
+    name: 'Bounty',
+    initial: 'B',
+    date: 'Février 2026',
+    text: 'Un déjeuner en famille devenu un moment mémorable — le chef est venu nous saluer en personne. Chaque assiette était un vrai coup de cœur.',
   },
   {
-    quote:
-      "Le patron est un professionnel : pas une assiette ne sort de sa cuisine sans supervision.",
-    author: 'Avis TripAdvisor',
+    name: 'Fabien R.',
+    initial: 'F',
+    date: 'Janvier 2026',
+    text: 'Le meilleur restaurant de Nouméa. Une qualité constante depuis des mois ; le patron supervise chaque assiette.',
   },
   {
-    quote:
-      'Des plats savoureux, bien présentés, réalisés avec des produits de qualité.',
-    author: 'Avis TripAdvisor',
+    name: 'Mathis G.',
+    initial: 'M',
+    date: 'Janvier 2026',
+    text: 'Découverte gustative et humaine incroyable. Une carte complète et la passion évidente du chef pour la cuisine française.',
+  },
+  {
+    name: 'BOB29',
+    initial: 'B',
+    date: 'Septembre 2025',
+    text: 'Généreux et goûteux, comme chez Mamie. Cuisine maison, service au top et produits frais. On reviendra sans hésiter.',
   },
 ];
 ---
 
 <section class="avis section-pad" id="avis">
   <div class="container">
-    <div class="avis-head reveal">
-      <p class="eyebrow">La parole aux gourmets</p>
-      <h2>Élu <em>n°1</em> des tables de Nouméa</h2>
-      <a
-        href={tripAdvisorUrl}
-        target="_blank"
-        rel="noopener"
-        class="ta-badge"
-      >
+    <div class="section-head center reveal">
+      <p class="eyebrow">Avis clients</p>
+      <h2>Ils en <em>parlent</em></h2>
+      <a href={tripAdvisorUrl} target="_blank" rel="noopener" class="ta-badge">
         <span class="ta-rank">N°1<small>/217</small></span>
         <span class="ta-meta">
           <span class="stars">★★★★★</span>
-          <span>4,6/5 · 570 avis sur TripAdvisor</span>
+          <span><strong>4,6/5</strong> · 570 avis sur TripAdvisor</span>
         </span>
       </a>
     </div>
 
-    <div class="quotes">
+    <div class="reviews">
       {
-        reviews.map((r) => (
-          <figure class="quote reveal">
+        reviews.map((r, i) => (
+          <figure class="review reveal" style={`--d:${(i % 2) * 90}ms`}>
+            <div class="rev-head">
+              <span class="avatar" aria-hidden="true">
+                {r.initial}
+              </span>
+              <span class="rev-id">
+                <span class="who">{r.name}</span>
+                <span class="when">{r.date}</span>
+              </span>
+            </div>
             <span class="stars">★★★★★</span>
-            <blockquote>“{r.quote}”</blockquote>
-            <figcaption>{r.author}</figcaption>
+            <p>“{r.text}”</p>
           </figure>
         ))
       }
@@ -55,49 +69,33 @@ const reviews = [
 
 <style>
   .avis {
-    background: var(--ink);
-    color: var(--cream);
+    background: var(--cream);
   }
-  .avis-head {
-    text-align: center;
-    max-width: 720px;
-    margin: 0 auto clamp(40px, 5vw, 60px);
-  }
-  .avis-head .eyebrow {
-    color: var(--gold-soft);
-  }
-  .avis-head h2 {
-    font-size: clamp(2.2rem, 5vw, 3.4rem);
-    margin: 0.6rem 0 1.8rem;
-  }
-  .avis-head em {
-    font-style: italic;
-    color: var(--gold-soft);
-  }
-
   .ta-badge {
     display: inline-flex;
     align-items: center;
     gap: 1rem;
-    padding: 0.85rem 1.4rem 0.85rem 1rem;
+    margin-top: 1.6rem;
+    padding: 0.8rem 1.4rem 0.8rem 1rem;
     border-radius: 16px;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
     transition: border-color 0.2s ease, transform 0.2s ease;
   }
   .ta-badge:hover {
-    border-color: var(--gold-soft);
+    border-color: var(--gold);
     transform: translateY(-2px);
   }
   .ta-rank {
     font-family: var(--font-serif);
     font-size: 2.2rem;
     line-height: 1;
-    color: var(--gold-soft);
+    color: var(--wine);
   }
   .ta-rank small {
     font-size: 1rem;
-    opacity: 0.7;
+    color: var(--muted);
   }
   .ta-meta {
     display: flex;
@@ -108,43 +106,58 @@ const reviews = [
     text-align: left;
   }
 
-  .stars {
-    color: var(--gold-soft);
-    letter-spacing: 0.12em;
-  }
-
-  .quotes {
+  /* Avis épurés, sans cartes — façon avis Google */
+  .reviews {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(16px, 2.4vw, 26px);
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(32px, 5vw, 64px) clamp(32px, 5vw, 72px);
+    max-width: 920px;
+    margin-inline: auto;
   }
-  .quote {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 18px;
-    padding: 1.9rem;
+  .rev-head {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.9rem;
   }
-  .quote .stars {
+  .avatar {
+    flex: none;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--cream-deep);
+    color: var(--brown);
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.25rem;
+  }
+  .rev-id {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .who {
+    font-weight: 600;
+  }
+  .when {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .review .stars {
     font-size: 0.95rem;
   }
-  .quote blockquote {
-    font-family: var(--font-serif);
-    font-size: 1.4rem;
-    line-height: 1.35;
-    margin: 0.9rem 0 1.1rem;
-    color: #fff;
-  }
-  .quote figcaption {
-    font-size: 0.82rem;
-    letter-spacing: 0.04em;
-    color: rgba(255, 255, 255, 0.55);
+  .review p {
+    margin-top: 0.6rem;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    line-height: 1.6;
   }
 
-  @media (max-width: 820px) {
-    .quotes {
+  @media (max-width: 720px) {
+    .reviews {
       grid-template-columns: 1fr;
-      max-width: 520px;
-      margin-inline: auto;
     }
   }
 </style>

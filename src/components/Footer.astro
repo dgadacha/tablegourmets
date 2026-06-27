@@ -1,46 +1,61 @@
 ---
 const year = 2026;
+const addr = '91 Rue Maurice Herzog, Nouméa';
+const dirUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(addr)}`;
 ---
 
 <footer class="footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <img
-        class="footer-logo"
-        src="/images/logo.png"
-        alt="La Table des Gourmets"
-      />
-      <p>Cuisine française à Nouméa, depuis 2009.</p>
+  <div class="footer-hero">
+    <div
+      class="fh-bg"
+      style="background-image:url('/images/facade-nuit.png')"
+      aria-hidden="true"
+    >
     </div>
+    <div class="fh-overlay" aria-hidden="true"></div>
+    <div class="container fh-content reveal">
+      <img class="fh-logo" src="/images/logo.png" alt="La Table des Gourmets" />
+      <p class="fh-text">
+        Depuis 2009, La Table des Gourmets vous accueille au cœur de Nouméa pour
+        partager une cuisine française généreuse et authentique.
+      </p>
+      <a href="#infos" class="btn btn-primary btn-lg">Nous trouver</a>
+    </div>
+  </div>
 
-    <div class="footer-cols">
-      <div>
-        <h4>Le restaurant</h4>
-        <p>91 rue Maurice Herzog</p>
-        <p>98800 Nouméa</p>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <p><a href="tel:+687249525">+687 24 95 25</a></p>
-        <p><a href="mailto:direction@latabledesgourmets.com">Nous écrire</a></p>
-      </div>
-      <div>
-        <h4>Suivez-nous</h4>
-        <p>
-          <a
-            href="https://www.facebook.com/tablegourmets/"
-            target="_blank"
-            rel="noopener">Facebook</a
-          >
-        </p>
-        <p>
-          <a
-            href="https://www.instagram.com/tabledesgourmets/"
-            target="_blank"
-            rel="noopener">Instagram</a
-          >
-        </p>
-      </div>
+  <div class="container footer-cols">
+    <div>
+      <h4>Le restaurant</h4>
+      <p>91 rue Maurice Herzog</p>
+      <p>Face au stade de Magenta</p>
+      <p>98800 Nouméa</p>
+      <p><a href={dirUrl} target="_blank" rel="noopener">Itinéraire ↗</a></p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p><a href="tel:+687249525">+687 24 95 25</a></p>
+      <p><a href="mailto:direction@latabledesgourmets.com">Nous écrire</a></p>
+      <p class="muted">Mar–Sam · 11h–13h30 & 19h–21h30</p>
+      <p class="muted">Dim & Lun · fermé</p>
+    </div>
+    <div>
+      <h4>Le site</h4>
+      <p><a href="#carte">La carte</a></p>
+      <p><a href="#avis">Avis clients</a></p>
+      <p><a href="#galerie">Galerie</a></p>
+      <p><a href="#infos">Contact</a></p>
+    </div>
+    <div>
+      <h4>Suivez-nous</h4>
+      <p>
+        <a href="https://www.facebook.com/tablegourmets/" target="_blank" rel="noopener">Facebook</a>
+      </p>
+      <p>
+        <a href="https://www.instagram.com/tabledesgourmets/" target="_blank" rel="noopener">Instagram</a>
+      </p>
+      <p>
+        <a href="https://www.tripadvisor.fr/Restaurant_Review-g294130-d1510079-Reviews-La_Table_des_Gourmets-Noumea_Grand_Terre.html" target="_blank" rel="noopener">TripAdvisor</a>
+      </p>
     </div>
   </div>
 
@@ -52,52 +67,78 @@ const year = 2026;
 
 <style>
   .footer {
-    background: #18120e;
+    background: #1c1410;
     color: rgba(247, 240, 227, 0.8);
-    padding-top: clamp(48px, 7vw, 80px);
   }
-  .footer-inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 40px;
-    padding-bottom: 40px;
+
+  /* Bannière photo de conclusion */
+  .footer-hero {
+    position: relative;
+    min-height: clamp(360px, 50vh, 460px);
+    display: grid;
+    place-items: center;
+    text-align: center;
+    overflow: hidden;
   }
-  .footer-brand {
+  .fh-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+  .fh-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      rgba(20, 15, 12, 0.72),
+      rgba(20, 15, 12, 0.82)
+    );
+  }
+  .fh-content {
+    position: relative;
+    z-index: 2;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.9rem;
-    max-width: 320px;
+    align-items: center;
+    max-width: 620px;
   }
-  .footer-logo {
-    height: 64px;
+  .fh-logo {
+    height: clamp(72px, 12vw, 104px);
     width: auto;
-    background: var(--paper);
-    padding: 12px 18px;
-    border-radius: 14px;
+    /* logo brun → blanc pour ressortir sur la photo sombre */
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
   }
-  .footer-brand p {
-    font-size: 0.9rem;
-    color: rgba(247, 240, 227, 0.6);
+  .fh-text {
+    margin: 1.6rem 0 1.8rem;
+    font-family: var(--font-serif);
+    font-size: clamp(1.2rem, 2.6vw, 1.6rem);
+    font-style: italic;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.92);
   }
 
   .footer-cols {
-    display: flex;
-    flex-wrap: wrap;
-    gap: clamp(28px, 5vw, 64px);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(20px, 3vw, 36px);
+    padding-block: clamp(40px, 6vw, 64px);
   }
   .footer-cols h4 {
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--gold-soft);
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.8rem;
   }
   .footer-cols p {
-    font-size: 0.92rem;
-    margin-bottom: 0.3rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+  }
+  .footer-cols .muted {
+    color: rgba(247, 240, 227, 0.45);
+    font-size: 0.84rem;
   }
   .footer-cols a:hover {
     color: #fff;
@@ -109,12 +150,17 @@ const year = 2026;
     justify-content: space-between;
     gap: 10px;
     padding: 22px 0;
-    margin-top: 8px;
     border-top: 1px solid rgba(247, 240, 227, 0.12);
     font-size: 0.82rem;
     color: rgba(247, 240, 227, 0.5);
   }
   .demo {
     color: rgba(247, 240, 227, 0.35);
+  }
+
+  @media (max-width: 820px) {
+    .footer-cols {
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 </style>

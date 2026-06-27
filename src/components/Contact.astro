@@ -1,61 +1,64 @@
 ---
 const hours = [
-  { d: 'Mardi', h: '11h00 – 13h30 · 19h00 – 21h30' },
-  { d: 'Mercredi', h: '11h00 – 13h30 · 19h00 – 21h30' },
-  { d: 'Jeudi', h: '11h00 – 13h30 · 19h00 – 21h30' },
-  { d: 'Vendredi', h: '11h00 – 13h30 · 19h00 – 21h30' },
-  { d: 'Samedi', h: '11h00 – 13h30 · 19h00 – 21h30' },
-  { d: 'Dimanche', h: 'Fermé', closed: true },
-  { d: 'Lundi', h: 'Fermé', closed: true },
+  { d: 'Mardi – Samedi', h: '11h00 – 13h30 · 19h00 – 21h30' },
+  { d: 'Dimanche & Lundi', h: 'Fermé', closed: true },
 ];
-const mapSrc =
-  'https://www.google.com/maps?q=91+Rue+Maurice+Herzog,+Noum%C3%A9a&output=embed';
+const addr = '91 Rue Maurice Herzog, Nouméa';
+const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(addr)}&output=embed`;
+const dirUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(addr)}`;
+const streetUrl = `https://www.google.com/maps?q=${encodeURIComponent(addr)}&layer=c`;
 ---
 
 <section class="infos section-pad" id="infos">
   <div class="container">
-    <div class="section-head reveal">
-      <p class="eyebrow">Réserver & nous trouver</p>
-      <h2>Une table vous <em>attend</em></h2>
+    <div class="section-head center reveal">
+      <p class="eyebrow">Nous trouver</p>
+      <h2>Localisation & <em>contact</em></h2>
     </div>
 
     <div class="infos-grid">
       <div class="infos-col reveal">
-        <div class="info-block">
-          <div class="info-row">
-            <h3>Réservations</h3>
-            <a href="tel:+687249525" class="phone">+687 24 95 25</a>
-            <p class="hint">Réservation conseillée, par téléphone.</p>
+        <div class="info-card">
+          <div class="info-row info-phone">
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              Téléphone
+            </h3>
+            <a href="tel:+687249525" class="phone-big">+687 24 95 25</a>
+            <p class="hint">N'hésitez pas à nous appeler.</p>
           </div>
-
           <div class="info-row">
-            <h3>Adresse</h3>
-            <p>
-              91 rue Maurice Herzog<br />
-              Face au stade de Magenta<br />
-              98800 Nouméa, Nouvelle-Calédonie
-            </p>
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Adresse
+            </h3>
+            <p>91 rue Maurice Herzog<br />Face au stade de Magenta<br />98800 Nouméa</p>
           </div>
-
           <div class="info-row">
-            <h3>Contact</h3>
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+              Email
+            </h3>
             <p>
               <a href="mailto:direction@latabledesgourmets.com"
                 >direction@latabledesgourmets.com</a
               >
             </p>
-            <p class="services">
-              <span>Sur place</span><span>À emporter</span><span>Terrasse</span>
-            </p>
           </div>
-
-          <a href="tel:+687249525" class="btn btn-primary big-cta"
-            >Appeler pour réserver</a
-          >
+          <div class="info-row">
+            <h3>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
+              Services
+            </h3>
+            <p class="services">Terrasse • Climatisation • Parking • Sur place • À emporter</p>
+          </div>
         </div>
 
-        <div class="hours">
-          <h3>Horaires</h3>
+        <div class="info-card hours">
+          <h3>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Horaires
+          </h3>
           <ul>
             {
               hours.map((row) => (
@@ -69,94 +72,118 @@ const mapSrc =
         </div>
       </div>
 
-      <div class="map reveal">
-        <iframe
-          title="Localisation de La Table des Gourmets à Nouméa"
-          src={mapSrc}
+      <div class="loc reveal">
+        <img
+          class="loc-photo"
+          src="/images/facade-nuit.png"
+          alt="Façade du restaurant La Table des Gourmets en soirée"
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
+        />
+        <div class="map">
+          <iframe
+            title="Localisation de La Table des Gourmets à Nouméa"
+            src={mapSrc}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <div class="loc-actions">
+          <a href={dirUrl} target="_blank" rel="noopener" class="btn btn-primary"
+            >Itinéraire</a
+          >
+          <a href={streetUrl} target="_blank" rel="noopener" class="btn btn-ghost"
+            >Voir en Street View</a
+          >
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
+  .infos {
+    padding-bottom: clamp(96px, 13vw, 170px);
+  }
   .infos-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(24px, 4vw, 48px);
-    align-items: stretch;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(20px, 3vw, 36px);
+    align-items: start;
   }
   .infos-col {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 18px;
   }
-
-  .info-block,
-  .hours {
+  .info-card {
     background: var(--paper);
     border: 1px solid var(--line);
     border-radius: 18px;
-    padding: clamp(1.5rem, 3vw, 2.2rem);
+    padding: clamp(1.4rem, 3vw, 2rem);
   }
   .info-row {
-    padding-bottom: 1.2rem;
-    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
     border-bottom: 1px solid var(--line);
   }
+  .info-row:last-child {
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border-bottom: 0;
+  }
+  .info-row h3,
+  .hours h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
   .info-row h3 {
-    font-size: 0.78rem;
+    font-size: 0.74rem;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--gold);
     font-family: var(--font-sans);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
+  }
+  .info-row h3 svg {
+    width: 15px;
+    height: 15px;
   }
   .info-row p {
     color: var(--ink-soft);
+    font-size: 1rem;
   }
   .info-row a {
     color: var(--wine);
     font-weight: 500;
     word-break: break-word;
   }
-  .phone {
+  /* Téléphone mis en avant — seul point de contact direct */
+  .phone-big {
+    display: inline-block;
     font-family: var(--font-serif);
-    font-size: 1.9rem !important;
+    font-size: clamp(1.7rem, 4vw, 2.2rem);
     font-weight: 600;
     color: var(--ink) !important;
+    line-height: 1.1;
   }
   .hint {
-    font-size: 0.86rem;
+    margin-top: 0.35rem;
     color: var(--muted);
-    margin-top: 0.3rem;
+    font-size: 0.9rem;
   }
   .services {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.7rem;
-  }
-  .services span {
-    font-size: 0.78rem;
-    padding: 0.3rem 0.7rem;
-    border-radius: 999px;
-    background: var(--cream-deep);
     color: var(--ink-soft);
   }
-  .big-cta {
-    width: 100%;
-    justify-content: center;
-    margin-top: 0.3rem;
-  }
-
   .hours h3 {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
-    margin-bottom: 0.9rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.7rem;
+    color: var(--ink);
+  }
+  .hours h3 svg {
+    width: 18px;
+    height: 18px;
+    color: var(--gold);
   }
   .hours ul {
     list-style: none;
@@ -165,48 +192,54 @@ const mapSrc =
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    padding: 0.5rem 0;
+    padding: 0.55rem 0;
     border-bottom: 1px dashed var(--line);
-    font-size: 0.94rem;
+    font-size: 1rem;
   }
   .hours li:last-child {
     border-bottom: 0;
   }
   .hours li span:first-child {
     font-weight: 600;
-    color: var(--ink);
-  }
-  .hours li span:last-child {
-    color: var(--ink-soft);
-    text-align: right;
   }
   .hours li.closed span:last-child {
     color: var(--wine);
     font-weight: 500;
   }
 
+  .loc {
+    display: grid;
+    gap: 14px;
+  }
+  .loc-photo {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: var(--shadow-sm);
+  }
   .map {
     border-radius: 18px;
     overflow: hidden;
     border: 1px solid var(--line);
-    min-height: 420px;
-    box-shadow: var(--shadow-sm);
+    min-height: 300px;
   }
   .map iframe {
     width: 100%;
     height: 100%;
-    min-height: 420px;
+    min-height: 300px;
     border: 0;
     display: block;
+  }
+  .loc-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
   }
 
   @media (max-width: 860px) {
     .infos-grid {
       grid-template-columns: 1fr;
-    }
-    .map {
-      min-height: 320px;
-      order: -1;
     }
   }
 </style>

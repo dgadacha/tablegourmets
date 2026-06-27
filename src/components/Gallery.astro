@@ -1,32 +1,35 @@
 ---
-// ⚠️ Photos de démonstration (Unsplash). À remplacer par les vraies photos
-// du restaurant (Instagram @tabledesgourmets) avant mise en production.
+// Galerie avec les vraies photos disponibles. Pour une immersion complète,
+// ajouter des photos d'ambiance (salle, terrasse de jour, bar, cave à vins,
+// dressage) dans public/images/ et les lister ici.
 const photos = [
-  '1559339352-11d035aa65de',
-  '1600891964599-f61ba0e24092',
-  '1424847651672-bf20a4b0982b',
-  '1546833999-b9f581a1996d',
-  '1504674900247-0877df9cc836',
-  '1540189549336-e6e99c3679fe',
-  '1551782450-a2132b4ba21d',
-  '1432139509613-5c4255815697',
+  { f: 'facade-nuit.png', alt: 'La terrasse en soirée', big: true },
+  {
+    f: 'jambonneau-braise-a-la.jpg',
+    alt: 'Jambonneau braisé à la bière — le plat signature',
+    big: true,
+  },
+  { f: 'foie-gras-de-canard.jpg', alt: 'Foie gras de canard' },
+  { f: 'moelleux-au-chocolat.jpg', alt: 'Moelleux au chocolat' },
+  { f: 'entrecote-grillee-pommes.jpg', alt: 'Entrecôte grillée' },
+  { f: 'sole-meuniere-legumes.jpg', alt: 'Sole meunière' },
+  { f: 'moules-gratinees-au-beurre.jpg', alt: 'Moules gratinées au beurre' },
+  { f: 'confit-de-canard-gratin.jpg', alt: 'Confit de canard' },
 ];
-const src = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?w=600&q=75&auto=format&fit=crop`;
 ---
 
 <section class="galerie section-pad" id="galerie">
   <div class="container">
-    <div class="section-head reveal">
+    <div class="section-head center reveal">
       <p class="eyebrow">En images</p>
-      <h2>L'atmosphère & <em>les assiettes</em></h2>
+      <h2>L'ambiance & <em>les assiettes</em></h2>
     </div>
 
     <div class="grid">
       {
-        photos.map((id) => (
-          <figure class="cell reveal">
-            <img src={src(id)} alt="La Table des Gourmets" loading="lazy" />
+        photos.map((p, i) => (
+          <figure class={`cell ${p.big ? 'big' : ''} reveal`} style={`--d:${(i % 4) * 60}ms`}>
+            <img src={`/images/${p.f}`} alt={p.alt} loading="lazy" />
           </figure>
         ))
       }
@@ -37,29 +40,29 @@ const src = (id: string) =>
         href="https://www.instagram.com/tabledesgourmets/"
         target="_blank"
         rel="noopener"
-        class="btn btn-ghost"
+        class="btn btn-ghost">Voir plus de photos sur Instagram</a
       >
-        Suivez-nous sur Instagram
-      </a>
     </div>
   </div>
 </section>
 
 <style>
+  .galerie {
+    background: var(--cream-deep);
+  }
   .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 200px;
+    grid-auto-rows: 210px;
     gap: 14px;
   }
   .cell {
     overflow: hidden;
-    border-radius: 14px;
-    background: var(--cream-deep);
+    border-radius: 16px;
+    background: var(--cream);
+    box-shadow: var(--shadow-sm);
   }
-  /* Quelques cellules plus grandes pour un effet mosaïque */
-  .cell:nth-child(1),
-  .cell:nth-child(6) {
+  .cell.big {
     grid-column: span 2;
     grid-row: span 2;
   }
@@ -67,7 +70,7 @@ const src = (id: string) =>
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.55s ease;
   }
   .cell:hover img {
     transform: scale(1.06);
@@ -83,8 +86,7 @@ const src = (id: string) =>
       grid-template-columns: repeat(2, 1fr);
       grid-auto-rows: 160px;
     }
-    .cell:nth-child(1),
-    .cell:nth-child(6) {
+    .cell.big {
       grid-column: span 2;
       grid-row: span 1;
     }

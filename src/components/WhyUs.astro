@@ -1,0 +1,92 @@
+---
+const items = [
+  {
+    title: 'Cuisine française traditionnelle',
+    text: 'Des classiques généreux, préparés maison au fil des saisons.',
+  },
+  {
+    title: 'Chef alsacien depuis 2009',
+    text: "Spécialités de sa région et suggestions du jour à l'ardoise.",
+  },
+  {
+    title: 'Produits frais & de qualité',
+    text: '« Des plats savoureux, réalisés avec de bons produits », disent les clients.',
+  },
+  {
+    title: 'Terrasse ombragée',
+    text: 'Pour déjeuner ou dîner au calme, au cœur de Nouméa.',
+  },
+  {
+    title: 'N°1 des tables de Nouméa',
+    text: '4,6/5 sur 570 avis — première place sur TripAdvisor.',
+  },
+  {
+    title: 'Climatisation & parking',
+    text: 'Confort assuré et stationnement facile sur place.',
+  },
+];
+---
+
+<section class="why section-pad" id="pourquoi">
+  <div class="container">
+    <div class="section-head center reveal">
+      <p class="eyebrow">Pourquoi nous choisir</p>
+      <h2>La meilleure table de <em>Nouméa</em></h2>
+    </div>
+
+    <div class="why-grid">
+      {
+        items.map((it, i) => (
+          <article class="why-card reveal" style={`--d:${i * 70}ms`}>
+            <span class="why-rule" aria-hidden="true" />
+            <h3>{it.title}</h3>
+            <p>{it.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(28px, 4vw, 56px) clamp(24px, 3vw, 48px);
+  }
+  .why-card {
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+  }
+  .why-rule {
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+    margin-bottom: 1.1rem;
+    transition: width 0.3s ease;
+  }
+  .why-card:hover .why-rule {
+    width: 66px;
+  }
+  .why-card h3 {
+    font-size: 1.55rem;
+    margin-bottom: 0.5rem;
+  }
+  .why-card p {
+    color: var(--ink-soft);
+    font-size: 1rem;
+    max-width: 40ch;
+  }
+
+  @media (max-width: 820px) {
+    .why-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 520px) {
+    .why-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
