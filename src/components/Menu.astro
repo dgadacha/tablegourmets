@@ -6,7 +6,7 @@ const get = (name: string) => menu.find((c) => c.cat === name)!;
 const find = (cat: string, name: string) =>
   get(cat).items.find((i) => i.name === name);
 
-// Aperçu représentatif (~11 plats) — le reste est dans la modal carte complète
+// Aperçu représentatif (~11 plats) — la carte complète est sur /carte
 const preview = [
   {
     cat: 'Les entrées',
@@ -64,9 +64,7 @@ const preview = [
     </div>
 
     <div class="carte-more reveal">
-      <button type="button" id="carteOpen" class="btn btn-primary btn-lg">
-        Voir la carte complète
-      </button>
+      <a href="/carte" class="btn btn-primary btn-lg">Voir la carte complète</a>
     </div>
 
     <p class="carte-foot reveal">
@@ -83,66 +81,6 @@ const preview = [
     </div>
   </div>
 </section>
-
-<dialog id="carteModal" class="carte-modal" aria-label="Carte complète">
-  <div class="cm-top">
-    <div class="cm-head">
-      <h2>La Carte</h2>
-      <button type="button" id="carteClose" class="cm-close" aria-label="Fermer la carte">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-          ><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg
-        >
-      </button>
-    </div>
-    <nav class="cm-nav" aria-label="Catégories de la carte">
-      {
-        menu.map((c, i) => (
-          <button type="button" class="cm-tab" data-target={`cm-${i}`}>
-            {c.cat}
-          </button>
-        ))
-      }
-    </nav>
-  </div>
-  <div class="cm-body">
-    <MenuList categories={menu} idPrefix="cm-" />
-    <p class="cm-foot">Prix en francs Pacifique (CFP) · Cuisine faite maison</p>
-  </div>
-</dialog>
-
-<script>
-  const openBtn = document.getElementById('carteOpen');
-  const modal = document.getElementById('carteModal') as HTMLDialogElement | null;
-  const closeBtn = document.getElementById('carteClose');
-
-  const open = () => {
-    modal?.showModal();
-    document.body.style.overflow = 'hidden';
-  };
-  const close = () => {
-    modal?.close();
-    document.body.style.overflow = '';
-  };
-
-  openBtn?.addEventListener('click', open);
-  closeBtn?.addEventListener('click', close);
-  modal?.addEventListener('cancel', () => {
-    document.body.style.overflow = '';
-  });
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) close();
-  });
-  modal?.querySelectorAll('.cm-tab').forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const id = tab.getAttribute('data-target');
-      if (id) {
-        document
-          .getElementById(id)
-          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-</script>
 
 <style>
   .carte {
@@ -230,104 +168,12 @@ const preview = [
     margin-top: 1.2rem;
   }
 
-  /* Modal carte complète */
-  .carte-modal {
-    width: min(920px, 94vw);
-    max-height: 90vh;
-    padding: 0;
-    border: 0;
-    border-radius: 20px;
-    background: var(--paper);
-    color: var(--ink);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    flex-direction: column;
-  }
-  .carte-modal[open] {
-    display: flex;
-  }
-  .carte-modal::backdrop {
-    background: rgba(20, 15, 12, 0.6);
-    backdrop-filter: blur(2px);
-  }
-  .cm-top {
-    flex: none;
-    background: var(--paper);
-    border-bottom: 1px solid var(--line);
-  }
-  .cm-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.1rem clamp(1.2rem, 3vw, 2rem);
-  }
-  .cm-head h2 {
-    font-size: 1.9rem;
-  }
-  .cm-close {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid var(--line);
-    background: var(--cream);
-    color: var(--ink);
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-  .cm-close:hover {
-    background: var(--cream-deep);
-  }
-  .cm-nav {
-    display: flex;
-    gap: 0.5rem;
-    overflow-x: auto;
-    padding: 0 clamp(1.2rem, 3vw, 2rem) 0.9rem;
-  }
-  .cm-tab {
-    flex: none;
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--ink-soft);
-    background: var(--cream);
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    padding: 0.4rem 0.9rem;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: border-color 0.2s ease, color 0.2s ease;
-  }
-  .cm-tab:hover {
-    border-color: var(--gold);
-    color: var(--ink);
-  }
-  .cm-body {
-    flex: 1;
-    overflow-y: auto;
-    padding: clamp(1.4rem, 3vw, 2.4rem);
-  }
-  .cm-foot {
-    text-align: center;
-    margin-top: 1.6rem;
-    font-size: 0.84rem;
-    color: var(--muted);
-  }
-
   @media (max-width: 760px) {
     .dish-feature {
       grid-template-columns: 1fr;
     }
     .feat-photo {
       min-height: 240px;
-    }
-    .carte-modal {
-      width: 100vw;
-      max-width: 100vw;
-      max-height: 100vh;
-      height: 100vh;
-      border-radius: 0;
     }
   }
 </style>

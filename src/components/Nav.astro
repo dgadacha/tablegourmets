@@ -1,15 +1,15 @@
 ---
 const links = [
-  { href: '#maison', label: 'La Maison' },
-  { href: '#carte', label: 'La Carte' },
-  { href: '#avis', label: 'Avis' },
-  { href: '#infos', label: 'Infos' },
+  { href: '/#maison', label: 'La Maison' },
+  { href: '/#carte', label: 'La Carte' },
+  { href: '/#avis', label: 'Avis' },
+  { href: '/#infos', label: 'Infos' },
 ];
 ---
 
 <header class="nav" id="nav">
   <div class="container nav-inner">
-    <a href="#top" class="brand">La Table des Gourmets</a>
+    <a href="/#top" class="brand">La Table des Gourmets</a>
 
     <nav class="nav-links" id="navLinks" aria-label="Navigation principale">
       {links.map((l) => <a href={l.href}>{l.label}</a>)}
