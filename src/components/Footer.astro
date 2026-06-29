@@ -14,7 +14,7 @@ const dirUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURICo
     </div>
     <div class="fh-overlay" aria-hidden="true"></div>
     <div class="container fh-content reveal">
-      <img class="fh-logo" src="/images/logo.png" alt="La Table des Gourmets" />
+      <img class="fh-logo" src="/images/logo-white.png" alt="La Table des Gourmets" />
       <p class="fh-text">
         Depuis 2009, La Table des Gourmets vous accueille au cœur de Nouméa pour
         partager une cuisine française généreuse et authentique.
@@ -105,8 +105,8 @@ const dirUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURICo
   .fh-logo {
     height: clamp(72px, 12vw, 104px);
     width: auto;
-    /* logo brun → blanc pour ressortir sur la photo sombre */
-    filter: brightness(0) invert(1);
+    /* logo blanc fourni */
+    filter: drop-shadow(0 4px 18px rgba(0, 0, 0, 0.35));
     opacity: 0.95;
   }
   .fh-text {

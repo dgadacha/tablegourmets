@@ -1,0 +1,94 @@
+---
+const { categories = [], idPrefix = '' } = Astro.props;
+---
+
+<div class="menu-list">
+  {
+    categories.map((c: any, i: number) => (
+      <section class="menu-cat" id={idPrefix ? `${idPrefix}${i}` : undefined}>
+        <div class="menu-cat-head">
+          <h3>{c.cat}</h3>
+        </div>
+        {c.note && <p class="menu-note">{c.note}</p>}
+        {c.items.map((it: any) => (
+          <div class="menu-item">
+            <span class="mi-name">{it.name}</span>
+            <span class="mi-price">{it.price} CFP</span>
+            {it.desc && <p class="mi-desc">{it.desc}</p>}
+          </div>
+        ))}
+      </section>
+    ))
+  }
+</div>
+
+<style>
+  .menu-list {
+    columns: 2;
+    column-gap: clamp(36px, 5vw, 80px);
+  }
+  .menu-cat {
+    break-inside: avoid;
+    margin-bottom: 2.4rem;
+    scroll-margin-top: 1rem;
+  }
+  .menu-cat-head {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-bottom: 0.6rem;
+  }
+  .menu-cat-head h3 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+  .menu-cat-head::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+  .menu-note {
+    font-size: 0.86rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+  }
+  .menu-item {
+    padding: 0.8rem 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .menu-cat .menu-item:last-child {
+    border-bottom: 0;
+  }
+  .mi-name {
+    display: block;
+    font-weight: 600;
+    font-size: 1.08rem;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .mi-price {
+    display: block;
+    margin-top: 0.15rem;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--wine);
+  }
+  .mi-desc {
+    margin-top: 0.3rem;
+    color: var(--muted);
+    font-size: 0.92rem;
+    max-width: 46ch;
+  }
+
+  @media (max-width: 760px) {
+    .menu-list {
+      columns: 1;
+    }
+  }
+</style>

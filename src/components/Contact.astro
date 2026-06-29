@@ -6,7 +6,6 @@ const hours = [
 const addr = '91 Rue Maurice Herzog, Nouméa';
 const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(addr)}&output=embed`;
 const dirUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(addr)}`;
-const streetUrl = `https://www.google.com/maps?q=${encodeURIComponent(addr)}&layer=c`;
 ---
 
 <section class="infos section-pad" id="infos">
@@ -50,7 +49,7 @@ const streetUrl = `https://www.google.com/maps?q=${encodeURIComponent(addr)}&lay
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2a2 2 0 0 0 2-2V2"></path><path d="M7 2v20"></path><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"></path></svg>
               Services
             </h3>
-            <p class="services">Terrasse • Climatisation • Parking • Sur place • À emporter</p>
+            <p class="services">Salle climatisée • Terrasse ventilée • Sur place • À emporter</p>
           </div>
         </div>
 
@@ -89,9 +88,6 @@ const streetUrl = `https://www.google.com/maps?q=${encodeURIComponent(addr)}&lay
         <div class="loc-actions">
           <a href={dirUrl} target="_blank" rel="noopener" class="btn btn-primary"
             >Itinéraire</a
-          >
-          <a href={streetUrl} target="_blank" rel="noopener" class="btn btn-ghost"
-            >Voir en Street View</a
           >
         </div>
       </div>

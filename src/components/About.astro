@@ -11,13 +11,12 @@ const stats = [
   <div class="container">
     <div class="maison-grid">
       <div class="maison-media reveal">
-        <div class="brand-plate">
-          <img
-            src="/images/logo.png"
-            alt="Logo La Table des Gourmets"
-            loading="lazy"
-          />
-        </div>
+        <img
+          class="maison-photo"
+          src="/images/terrasse.jpg"
+          alt="La terrasse de La Table des Gourmets"
+          loading="lazy"
+        />
         <div class="maison-tag">
           <span>Depuis</span>
           <strong>2009</strong>
@@ -66,20 +65,12 @@ const stats = [
   .maison-media {
     position: relative;
   }
-  .brand-plate {
-    display: grid;
-    place-items: center;
+  .maison-photo {
+    width: 100%;
     aspect-ratio: 4 / 3;
-    padding: clamp(2rem, 5vw, 3.5rem);
-    background: var(--paper);
-    border: 1px solid var(--line);
+    object-fit: cover;
     border-radius: 20px;
     box-shadow: var(--shadow);
-  }
-  .brand-plate img {
-    width: 100%;
-    max-width: 360px;
-    height: auto;
   }
   .maison-tag {
     position: absolute;
